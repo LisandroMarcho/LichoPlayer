@@ -9,23 +9,27 @@
         body {
             background-color: #2b2e4a;
         }
+
+        main {
+            display: flex; 
+            flex-direction: row;
+        }
+
+        .songList {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
     <audio id="audio"></audio>
-    <main style="display: flex; flex-direction: column;">
+    <main>
         <section>
-            <button id="play" onclick="playPause()" >Play</button>
-            <button id="stop" onclick="stop()" disabled="true">Stop</button>
+            <button id="play" >Play</button>
+            <button id="stop" disabled="true">Stop</button>
         </section>
-        <section>
-            <table style="border: 1px solid black;">
-                <tr>
-                    <td>
-                        dsad
-                    </td>
-                </tr>
-            </table>
+        <section class="songList">
+            <a href="#" class="songList__song" data-song="song1">Song 1</a>
         </section>
     </main>
     <script src="main.js"></script>
