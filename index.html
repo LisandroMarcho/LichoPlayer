@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Licho Player</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
         body {
             background-color: #2b2e4a;
         }
@@ -22,14 +26,25 @@
     </style>
 </head>
 <body>
-    <audio id="audio"></audio>
+    <audio id="audio" preload="metadata"></audio>
     <main>
         <section>
-            <button id="play" >Play</button>
-            <button id="stop" disabled="true">Stop</button>
+            <button onclick="previusSong()">Previus song</button>
+            <button id="play" onclick="playPause()">Play</button>
+            <button id="stop" onclick="stopSong()" disabled="true">Stop</button>
+            <button onclick="nextSong()">Next song</button>
+            <section>
+                <label for="progress" id="currentTime">0:00</label>
+                <input type="range" id="progress" value="0">
+                <label id="duration">-</label>
+            </section>
         </section>
         <section class="songList">
-            <a href="#" class="songList__song" data-song="song1">Song 1</a>
+            <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song1">Song 1</a>
+            <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song2">Song 2</a>
+            <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song3">Song 3</a>
+            <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song4">Song 4</a>
+            <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song5">Song 5</a>
         </section>
     </main>
     <script src="main.js"></script>
