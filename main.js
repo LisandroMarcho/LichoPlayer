@@ -97,7 +97,8 @@ async function playFromList (song) {
 
 function songEnded () {
   let songIndex = playList.indexOf(LichoPlayer.dataset.file);
-  if((songIndex + 1) == playList.length) stopSong();
+  if((songIndex + 1) == playList.length || LichoPlayer.dataset.autoplay == "off") 
+    stopSong();
   else nextSong();
 }
 
@@ -123,4 +124,15 @@ function metaLoaded () {
 
 function clickOnProgressBar () {
   LichoPlayer.currentTime = progressBar.value;
+}
+
+function toggleAutoplay (autoplayButton) {
+  if (LichoPlayer.dataset.autoplay == "on"){
+    LichoPlayer.dataset.autoplay ="off";
+    autoplayButton.innerText = "Autoplay: OFF";
+  }
+  else {
+    LichoPlayer.dataset.autoplay ="on";
+    autoplayButton.innerText = "Autoplay: ON";
+  }
 }

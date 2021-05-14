@@ -15,8 +15,16 @@
         }
 
         main {
-            display: flex; 
-            flex-direction: row;
+            display: grid; 
+            grid-template-columns: 50vw 50vw;
+        }
+
+        .center-all {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .songList {
@@ -26,20 +34,23 @@
     </style>
 </head>
 <body>
-    <audio id="audio" preload="metadata"></audio>
+    <audio id="audio" preload="metadata" data-autoplay="on"></audio>
     <main>
-        <section>
-            <button onclick="previusSong()">Previus song</button>
-            <button id="play" onclick="playPause()">Play</button>
-            <button id="stop" onclick="stopSong()" disabled="true">Stop</button>
-            <button onclick="nextSong()">Next song</button>
+        <section class="center-all">
             <section>
-                <label for="progress" id="currentTime">0:00</label>
-                <input type="range" id="progress" value="0">
-                <label id="duration">-</label>
+                <button onclick="previusSong()">Previus song</button>
+                <button id="play" onclick="playPause()">Play</button>
+                <button id="stop" onclick="stopSong()" disabled="true">Stop</button>
+                <button onclick="nextSong()">Next song</button>
+                <button onclick="toggleAutoplay(this);">Autoplay: ON</button>
+            </section>
+            <section>
+                <label class="progress-label" for="progress" id="currentTime">0:00</label>
+                <input class="progress" type="range" id="progress" value="0">
+                <label class="progress-label" id="duration">-</label>
             </section>
         </section>
-        <section class="songList">
+        <section class="center-all songList">
             <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song1">Song 1</a>
             <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song2">Song 2</a>
             <a href="#" class="songList__song" onclick="playFromList(this)" data-file="song3">Song 3</a>
