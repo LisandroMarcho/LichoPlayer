@@ -1,17 +1,22 @@
 const playList = ["song1", "song2", "song3", "song4", "song5"];
+const songNames = ["Song 1", "Song 2", "Song 3", "Song 4", "Song 5"];
 
 var LichoPlayer = null;
 var playButton = null;
 var stopButton = null;
 var progressBar = null;
+var timeLabel = null;
+var durationLabel = null;
+var currentlyPlaying = null;
 
-window.onload = async function () {
-  LichoPlayer   = document.getElementById("audio");
-  playButton    = document.getElementById("play");
-  stopButton    = document.getElementById("stop");
-  progressBar   = document.getElementById("progress");
-  timeLabel     = document.getElementById("currentTime");
+window.onload = function () {
+  LichoPlayer = document.getElementById("audio");
+  playButton = document.getElementById("play");
+  stopButton = document.getElementById("stop");
+  progressBar = document.getElementById("progress");
+  timeLabel = document.getElementById("currentTime");
   durationLabel = document.getElementById("duration");
+  currentlyPlaying = document.getElementById("currentlyPlaying");
 
   LichoPlayer.onended = songEnded;
   LichoPlayer.ontimeupdate = updateProgressBar
@@ -19,15 +24,16 @@ window.onload = async function () {
 
   progressBar.onchange = clickOnProgressBar;
 
-  await loadSong(playList[0]);
+  loadSong(playList[0]);
 };
 
-async function loadSong(song) {
+function loadSong(song) {
   stopSong();
+  let songIndex = playList.indexOf(song);
 
   try {
     LichoPlayer.src = `songs/${song}.mp3`;
-    await LichoPlayer.load();
+    LichoPlayer.load();
     LichoPlayer.dataset.state = "loaded";
     LichoPlayer.dataset.file = song;
   } catch (error) {
@@ -35,9 +41,10 @@ async function loadSong(song) {
   }
 
   progressBar.value = 0;
+  currentlyPlaying.innerText = songNames[songIndex];
 }
 
-async function playPause() {
+function playPause() {
   switch (LichoPlayer.dataset.state) {
     case "playing":
       LichoPlayer.pause();
@@ -65,33 +72,33 @@ function stopSong() {
   progressBar.value = 0;
 }
 
-async function nextSong() {
+function nextSong() {
   let songIndex = playList.indexOf(LichoPlayer.dataset.file);
   if (songIndex != playList.length - 1) {
-    await loadSong(playList[songIndex + 1]);
+    loadSong(playList[songIndex + 1]);
     playPause();
   }
   else {
-    await loadSong(playList[0]);
+    loadSong(playList[0]);
     playPause();
   }
 }
 
-async function previusSong() {
+function previusSong() {
   let songIndex = playList.indexOf(LichoPlayer.dataset.file);
   if (songIndex != 0) {
-    await loadSong(playList[songIndex - 1]);
+    loadSong(playList[songIndex - 1]);
     playPause();
   }
   else {
-    await loadSong(playList[playList.length - 1]);
+    loadSong(playList[playList.length - 1]);
     playPause();
   }
 }
 
-async function playFromList (song) {
+function playFromList (song) {
   let songIndex = playList.indexOf(song.dataset.file);
-  await loadSong(playList[songIndex]);
+  loadSong(playList[songIndex]);
   playPause();
 }
 

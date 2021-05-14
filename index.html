@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"   content="width=device-width, initial-scale=1.0">
     <title>Licho Player</title>
     <style>
+        :root {
+            font-size: 20px;
+        }
+
         * {
             padding: 0;
             margin: 0;
@@ -19,6 +23,33 @@
             grid-template-columns: 50vw 50vw;
         }
 
+        button {
+            border: none;
+            border-radius: 4px;
+            background: #e84545;
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #903749;
+        }
+
+        button:active {
+            background: #53354a;
+        }
+
+        button:disabled {
+            background: #903749;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
         .center-all {
             height: 100vh;
             display: flex;
@@ -27,9 +58,31 @@
             justify-content: center;
         }
 
-        .songList {
-            display: flex;
-            flex-direction: column;
+        .songList { gap: 5px; }
+
+        .songList a {
+            text-decoration: none;
+            color: #e84545;
+            width: 50%;
+            background-color: #3f4262;
+            text-align: center;
+            padding: 5px;
+        }
+
+        a:hover {
+            color: #903749;
+        }
+
+        a:active {
+            color: #53354a;
+        }
+
+        .progress-label {
+            color: white;
+        }
+
+        .progress {
+            width: 500px;
         }
     </style>
 </head>
@@ -37,6 +90,9 @@
     <audio id="audio" preload="metadata" data-autoplay="on"></audio>
     <main>
         <section class="center-all">
+            <section>
+                <h2 id="currentlyPlaying">Song 1</h2>
+            </section>
             <section>
                 <button onclick="previusSong()">Previus song</button>
                 <button id="play" onclick="playPause()">Play</button>
